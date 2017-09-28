@@ -1,97 +1,7 @@
 package main
 import ("fmt"
-"math"
+"bufio"
 "os")
-
-//Give the user a calculation choice
-
-
-// Enter first number and set to x
-func main() {
-
-  fmt.Print(`Which calculation do you want to run?
-
-  1) Addition
-  2) Subtraction
-  3) Multiplication
-  4) None; I've had enough!
-
-Please enter 1..4 and press ENTER: `)
-
-switch {
-
-case '1':
-
-  // Enter first number and set to x
-      fmt.Println("Enter your first number: ")
-      var x int
-      fmt.Scanln(&x)
-
-  // Enter second number and set to y
-      fmt.Println("Enter your second number: ")
-      var y int
-      fmt.Scanln(&y)
-
-  //Adds the two numbers using the add function below
-      fmt.Println("The sum of your numbers is",add(x,y),".")
-
-  break
-
-case '2':
-
-  // Enter first number and set to x
-      fmt.Println("Enter your first number: ")
-      var x int
-      fmt.Scanln(&x)
-
-  // Enter second number and set to y
-      fmt.Println("Enter your second number: ")
-      var y int
-      fmt.Scanln(&y)
-
-  //Subtracts the two numbers using the minus function below
-      fmt.Println("The difference between your numbers is",minus(x,y),".")
-
-  break
-
-case '3':
-
-  // Enter first number and set to x
-      fmt.Println("Enter your first number: ")
-      var x int
-      fmt.Scanln(&x)
-
-  // Enter second number and set to y
-      fmt.Println("Enter your second number: ")
-      var y int
-      fmt.Scanln(&y)
-
-  //Multiplies the two numbers using the prod function below
-      fmt.Println("The difference between your numbers is",prod(x,y),".")
-
-  break
-
-case '4':
-  return print.ln("Oh, that's a shame!")
-  os.Exit(0)
-  break
-
-default:
-  return
-}
-
-
-
-//Adds the two numbers using the add function below
-    fmt.Println("The sum of your numbers is",add(x,y),".")
-
-//Subtracts the two numbers using the minus function below
-    fmt.Println("The difference between your numbers is",minus(x,y),".")
-
-    //Squares the numbers
-
-        fmt.Println("The squares of your numbers are", sq(x), "and ", sq(y))
-    }
 
 
 // Creates a function add which sums two integers
@@ -113,8 +23,84 @@ func prod(e int, f int) int {
 }
 
 
-// Creates a function to square a given integer
-func sq (e int) float64 {
-g := float64(e)
-    return math.Pow(g,2)
+func main() {
+
+for {
+
+  fmt.Print(`Which calculation do you want to run?
+
+  1) Addition
+  2) Subtraction
+  3) Multiplication
+  4) None; I've had enough!
+
+Please enter 1..4 and press ENTER: `)
+
+reader := bufio.NewReader(os.Stdin)
+result, _, err := reader.ReadRune()
+if err != nil {
+	fmt.Println(err)
+	return
 }
+
+switch result {
+
+case '1':
+
+  // Enter first number and set to x
+      fmt.Println("Enter your first number: ")
+      var x int
+      fmt.Scanln(&x)
+
+  // Enter second number and set to y
+      fmt.Println("Enter your second number: ")
+      var y int
+      fmt.Scanln(&y)
+
+  //Adds the two numbers using the add function below
+      fmt.Println("The sum of your numbers is",add(x,y),".")
+
+  
+
+case '2':
+
+  // Enter first number and set to x
+      fmt.Println("Enter your first number: ")
+      var x int
+      fmt.Scanln(&x)
+
+  // Enter second number and set to y
+      fmt.Println("Enter your second number: ")
+      var y int
+      fmt.Scanln(&y)
+
+  //Subtracts the two numbers using the minus function below
+      fmt.Println("The difference between your numbers is",minus(x,y),".")
+
+  
+
+case '3':
+
+  // Enter first number and set to x
+      fmt.Println("Enter your first number: ")
+      var x int
+      fmt.Scanln(&x)
+
+  // Enter second number and set to y
+      fmt.Println("Enter your second number: ")
+      var y int
+      fmt.Scanln(&y)
+
+  //Multiplies the two numbers using the prod function below
+      fmt.Println("The difference between your numbers is",prod(x,y),".")
+
+  
+
+case '4':
+  fmt.Println("Oh, that's a shame!")
+  os.Exit(0)
+ 
+default:
+  
+
+}}}
