@@ -59,9 +59,7 @@ case '1':
 
   //Adds the two numbers using the add function below
       fmt.Println("The sum of your numbers is",add(x,y),".")
-
-  
-
+ 
 case '2':
 
   // Enter first number and set to x
@@ -76,8 +74,6 @@ case '2':
 
   //Subtracts the two numbers using the minus function below
       fmt.Println("The difference between your numbers is",minus(x,y),".")
-
-  
 
 case '3':
 
@@ -94,13 +90,9 @@ case '3':
   //Multiplies the two numbers using the prod function below
       fmt.Println("The difference between your numbers is",prod(x,y),".")
 
-  
-
 case '4':
   fmt.Println("Oh, that's a shame!")
   os.Exit(0)
  
 default:
-  
-
 }}}
