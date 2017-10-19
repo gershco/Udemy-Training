@@ -1,0 +1,1 @@
+Create a variable of type string and use backtick characters to assign a raw string literal to the variable.

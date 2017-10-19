@@ -1,0 +1,1 @@
+Convert a string to a slice of bytes and then print that.
