@@ -1,0 +1,1 @@
+Use fmt.Sprintf to string print to a variable the number 394 in hex. Then use fmt.Println to print that variable to standard output.

@@ -1,0 +1,1 @@
+Create a variable of type int initialised to its zero value. Use fmt.Scan to receive input from the user at the terminal and store that input in the variable of type int which you created.

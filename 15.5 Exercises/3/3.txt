@@ -1,0 +1,1 @@
+Use fmt.Printf to print the type of a variable.
