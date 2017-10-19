@@ -10,6 +10,8 @@ func main() {
 
 	fmt.Println("Please enter a number less than 100.")
 
-	n = fmt.Scan(n)
+	fmt.Scan(&n)
+
+	fmt.Println("Your number was", n)
 
 }
