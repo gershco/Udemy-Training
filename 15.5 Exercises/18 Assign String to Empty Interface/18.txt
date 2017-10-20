@@ -1,0 +1,1 @@
+Create own type with an underlying type of empty interface. Create a variable of this type. Assign a string to the variable and then prove the underlying type is a string.
