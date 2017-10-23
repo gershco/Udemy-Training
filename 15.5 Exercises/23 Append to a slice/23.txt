@@ -1,0 +1,1 @@
+Append to a slice. Print length and capacity.

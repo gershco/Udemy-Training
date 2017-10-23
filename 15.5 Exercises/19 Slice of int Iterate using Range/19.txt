@@ -1,0 +1,1 @@
+Create a slice of int. Iterate over the slice using range, printing each int.
