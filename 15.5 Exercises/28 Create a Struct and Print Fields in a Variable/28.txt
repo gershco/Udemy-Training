@@ -1,0 +1,1 @@
+Create a struct to store"person" fields of data. Create a value of that type and store it in a variable. Print the fields in that variable.
