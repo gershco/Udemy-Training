@@ -28,3 +28,4 @@ func main() {
 	fmt.Printf("It has length %d and capacity %d.\n", len(frveg), cap(frveg))
 	fmt.Println()
 }
+
