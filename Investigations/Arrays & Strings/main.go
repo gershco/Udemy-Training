@@ -6,27 +6,19 @@ import (
 
 func main() {
 
-	fruitarray := [...]string{"apple", "orange", "grape", "mango", "water melon", "pine apple", "chikoo"}
+	vegarray := [...]string{"tomato", "cucumber", "pepper", "courgette", "cauliflower", "brocolli"}
 
-	fmt.Printf("length of array%d capacity %d\n", len(fruitarray), cap(fruitarray))
-
-	fruitslice := fruitarray[6:]
-
-	for i, v := range fruitslice {
-
-		fmt.Println("index number", i, "has the value", v)
-	}
-
-	fmt.Printf("length of slice %d capacity %d\n", len(fruitslice), cap(fruitslice)) //length of is 2 and capacity is 6
-
+	fmt.Println("vegarray is", vegarray)
 	fmt.Println()
 
-	fruitslice = fruitslice[:cap(fruitslice)] //re-slicing furitslice till its capacity
+	vegslice := vegarray[1:3]
+	fmt.Println(`vegslice, formed by "vegarray[1:3]" is`, vegslice)
 
-	for i, v := range fruitslice {
+	fmt.Printf("Length of vegslice is %d. Capacity is %d\n", len(vegslice), cap(vegslice))
+	fmt.Println()
 
-		fmt.Println("index number", i, "has the value", v)
-	}
+	vegslice = vegslice[:cap(vegslice)] //re-slicing vegslice till its capacity
+	fmt.Println(`Reslicing with "vegslice = vegslice[:cap(vegslice)]" produces vegslice:`, vegslice)
+	fmt.Println("After re-slicing length is", len(vegslice), "and capacity is", cap(vegslice))
 
-	fmt.Println("After re-slicing length is", len(fruitslice), "and capacity is", cap(fruitslice))
 }
