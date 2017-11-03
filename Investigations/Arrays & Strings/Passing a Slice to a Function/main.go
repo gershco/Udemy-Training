@@ -31,5 +31,4 @@ func main() {
 	fmt.Println("Array before function call is", odds)
 	subtractTwo(odds)
 	fmt.Println("Array after function call is", odds)
-
 }
