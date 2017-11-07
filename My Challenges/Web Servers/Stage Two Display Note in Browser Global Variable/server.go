@@ -1,15 +1,19 @@
 package main
 
 import (
-	"fmt"
 	"io"
 	"io/ioutil"
 	"net/http"
 )
 
+//Entry is used by different functions.
+var Entry string
+
 func main() {
+
 	http.HandleFunc("/grab", grab)
 	http.HandleFunc("/edit", edit)
+	http.HandleFunc("/", index)
 
 	http.Handle("/favicon.ico", http.NotFoundHandler())
 	http.ListenAndServe(":7070", nil)
@@ -31,15 +35,13 @@ func grab(w http.ResponseWriter, r *http.Request) {
 
 	} else {
 
-		entry := r.FormValue("input")
+		Entry = r.FormValue("input")
 
-		fmt.Println(entry)
+		Note := []byte(Entry)
 
-		note := []byte(entry)
+		ioutil.WriteFile("note", Note, 0664)
 
-		ioutil.WriteFile("note", note, 0664)
-
-		io.WriteString(w, "<b>Your note has been saved.</b>")
+		io.WriteString(w, "<b>Thank you. Your note has been received.</b>")
 
 	}
 }
@@ -47,6 +49,15 @@ func grab(w http.ResponseWriter, r *http.Request) {
 func edit(w http.ResponseWriter, r *http.Request) {
 
 	w.Header().Set("Content-Type", "text/html; charset=utf-8")
-	http.ServeFile(w, r, "note")
+
+	io.WriteString(w, ""+Entry)
+
+}
+
+func index(w http.ResponseWriter, r *http.Request) {
+
+	w.Header().Set("Content-Type", "text/html; charset=utf-8")
+
+	io.WriteString(w, "<b>You need to browse to localhost:7070/grab or localhost:7070/edit<b>")
 
 }

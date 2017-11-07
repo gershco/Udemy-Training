@@ -1,0 +1,35 @@
+<!doctype html>
+
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+
+  <title>Note Entry</title>
+  <meta name="description" content="Note Entry">
+  <meta name="author" content="Working in the Dark!">
+
+  
+  
+  <!--[if lt IE 9]>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/html5shiv/3.7.3/html5shiv.js"></script>
+  <![endif]-->
+  
+
+  <script src="https://cloud.tinymce.com/stable/tinymce.min.js"></script>
+  <script>tinymce.init({ selector:'notearea', menubar: false});</script>
+
+ </head>
+
+<body>
+  
+
+<h1>Please enter your note below.</h1>
+
+<notearea>
+<form method = "POST" name = "input">
+<input type = "submit" value="Submit note">
+</form>
+</notearea>
+
+</body>
+</html>
