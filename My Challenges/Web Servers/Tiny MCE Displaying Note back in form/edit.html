@@ -1,0 +1,26 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+
+  <title>Note Entry</title>
+
+  <script src="https://cloud.tinymce.com/stable/tinymce.min.js"></script>
+
+</head>
+
+<body>
+  
+<h1>Please edit and confirm your note below.</h1>
+
+<script>tinymce.init({height : "200", selector:'textarea', menubar: false});</script>
+
+<form method = "POST" name = "input">
+  <textarea name="entry">{{template "note.html"}}
+  </textarea>
+  <input type = "submit" value="Confirm note">
+</form>
+
+</body>
+
+</html>

@@ -1,7 +1,7 @@
 package main
 
 import (
-	"fmt"
+	"html/template"
 	"io"
 	"io/ioutil"
 	"net/http"
@@ -28,32 +28,47 @@ func grab(w http.ResponseWriter, r *http.Request) {
 
 	} else {
 
-		Entry := r.FormValue("input")
+		Entry := r.FormValue("entry")
 
-		fmt.Println(Entry)
+		//fmt.Println(Entry)
 
 		note := []byte(Entry)
 
-		ioutil.WriteFile("note", note, 0664)
-
-		//io.WriteString(w, "<b>Your note has been saved.</b>")
-		//http.ServeFile(w, r, "saved.html")
+		ioutil.WriteFile("note.html", note, 0664)
 
 	}
 }
 
 func edit(w http.ResponseWriter, r *http.Request) {
 
-	w.Header().Set("Content-Type", "text/html; charset=utf-8")
+	if r.Method == "GET" {
 
-	io.WriteString(w, "<b>Please check your note. </b><br> "+Entry)
+		t, err := template.ParseFiles("edit.html", "note.html")
+		if err != nil {
+			panic(err)
+		}
 
+		err = t.ExecuteTemplate(w, "edit.html", nil)
+		if err != nil {
+			panic(err)
+		}
+
+	} else {
+
+		Entry := r.FormValue("entry")
+
+		//fmt.Println(Entry)
+
+		note := []byte(Entry)
+
+		ioutil.WriteFile("note.html", note, 0664)
+
+	}
 }
 
 func index(w http.ResponseWriter, r *http.Request) {
 
 	w.Header().Set("Content-Type", "text/html; charset=utf-8")
 
-	io.WriteString(w, "<b>You need to browse to localhost:7070/grab or localhost:7070/edit<b>")
-
+	io.WriteString(w, "<b>You need to browse to localhost:8081/grab or localhost:8081/edit<b>")
 }

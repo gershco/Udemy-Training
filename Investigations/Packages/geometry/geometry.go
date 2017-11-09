@@ -7,7 +7,7 @@ import (
 	"fmt"
 	"log"
 
-	"Github.com/gershco/Udemy-Training/Investigations/Packages/geometry/rectangle" //importing custom package
+	"Github.com/gershco/UdemyTraining/Investigations/Packages/geometry/rectangle" //importing custom package
 )
 
 /*
