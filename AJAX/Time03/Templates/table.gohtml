@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html>
+<head>
+<style>
+table, th, td {
+    border: 1px solid black;
+}
+</style>
+</head>
+<body>
+
+<table style="width:100%">
+  <tr>
+    <th>Request</th>
+    <th>Response</th> 
+      </tr>
+  <tr>
+    <td id = "time">What time is it?</td>
+    <td id = "timeResponse"></td>
+        </tr>
+  <tr>
+    <td id = "date">What is today's date?</td>
+    <td id = "dateResponse"></td>
+        </tr>
+
+  <tr>
+    <td> <input type="checkbox" name="tick" value="tick">Tick to show time and date. </td>
+        </tr>
+
+  </table>
+
+
+<script>
+    // This line needs fixing for presence of tick. document.querySelector('#time').onclick = timeDate;
+
+    function timeDate() {
+        var xhr = new XMLHttpRequest();
+        xhr.open('GET', '/time', true);
+        xhr.onreadystatechange = function() {
+          timeNow = xhr.responseText
+            if(xhr.readyState === XMLHttpRequest.DONE && xhr.status === 200){
+                document.getElementById("timeResponse").innerHTML= timeNow;
+                document.getElementById("dateResponse").innerHTML = dateNow;
+            }
+        };
+        xhr.send();
+    }
+
+
+
+</script>
+
+</body>
+</html>
