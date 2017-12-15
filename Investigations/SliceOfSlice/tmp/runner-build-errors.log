@@ -1,0 +1,2 @@
+# github.com/gershco/UdemyTraining/Investigations/SliceOfSlice
+.\main.go:17:20: cannot convert slices (type [][]byte) to type string

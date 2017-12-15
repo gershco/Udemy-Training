@@ -1,0 +1,2 @@
+# github.com/gershco/UdemyTraining/Databases/Postgres/QueryAndDisplay/05a AllRecordsSliceofStructToJson
+.\main.go:92:21: cannot use userjson (type []byte) as type User in append
