@@ -98,4 +98,9 @@ func main() {
 		panic(err)
 	}
 	fmt.Println(jsonusers)
+
+	fmt.Println()
+
+	fmt.Println(len(jsonusers))
+
 }

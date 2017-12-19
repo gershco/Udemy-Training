@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html>
+<head>
+<style>
+table, th, td {
+    border: 1px solid black;
+}
+</style>
+</head>
+<body>
+
+<table style="width:100%">
+  <tr>
+    <th>Request</th>
+    <th>Response</th> 
+      </tr>
+  <tr>
+    <td id = "time">What time is it?</td>
+    <td id = "timeResponse"></td>
+        </tr>
+  <tr>
+    <td id = "date">What is today's date?</td>
+    <td id = "dateResponse"></td>
+        </tr>
+
+  <tr>
+    <td id = "td"><a href = "/td.html">Click here to show the time and date.</a></td>
+        </tr>
+
+  </table>
+<!--
+
+<script>
+
+    document.querySelector('#td').onclick = timeDate;
+
+    
+
+    function timeDate() {
+        var xhr = new XMLHttpRequest();
+        xhr.open('GET', '/td', true);
+        xhr.onreadystatechange = function() {
+          timeNow = xhr.responseText
+            if(xhr.readyState === XMLHttpRequest.DONE && xhr.status === 200){
+                {{range .}}
+                document.getElementById("timeResponse").innerHTML= {{.Time}};
+                document.getElementById("dateResponse").innerHTML = {{.Date}};
+                {{end}}
+            }
+        };
+
+    
+        xhr.send();
+    }
+
+
+
+</script>
+
+-->
+
+</body>
+</html>

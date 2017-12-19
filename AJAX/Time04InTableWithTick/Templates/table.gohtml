@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html>
+<head>
+<style>
+table, th, td {
+    border: 1px solid black;
+}
+</style>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+</head>
+<body>
+
+<table style="width:100%">
+  <tr>
+    <th>Request</th>
+    <th>Response</th> 
+      </tr>
+  <tr>
+
+
+
+    <td><input id = "time" type="checkbox" name="time"/>What time is it?</td>
+    <td id = "timeResponse"></td>
+        </tr>
+  <tr>
+    <td><input id = "date" type="checkbox" name="date"/>What is today's date?</td>
+    <td id = "dateResponse"></td>
+      </tr>
+  </table>
+
+<!--
+document.querySelector('#time').onclick = whatTime;
+
+
+--> 
+
+<script>
+
+$('#time').on('change',function() {
+
+    if(this.checked){
+
+        var xhr = new XMLHttpRequest();
+        xhr.open('GET', '/time', true);
+        xhr.onreadystatechange = function() {
+                timeNow = xhr.responseText
+                if(xhr.readyState === XMLHttpRequest.DONE && xhr.status === 200){
+                    document.getElementById("timeResponse").innerHTML= timeNow;
+                }
+        };
+        xhr.send();
+    } else {
+
+         document.getElementById("timeResponse").innerHTML= "";
+    }
+        
+})
+
+$('#date').on('change',function() {
+
+    if(this.checked){
+       
+        var xhr = new XMLHttpRequest();
+        xhr.open('GET', '/date', true);
+        xhr.onreadystatechange = function() {
+            dateNow = xhr.responseText
+            if(xhr.readyState === XMLHttpRequest.DONE && xhr.status === 200){
+                document.getElementById("dateResponse").innerHTML = dateNow;
+            }
+        };
+        xhr.send();
+    } else {
+
+         document.getElementById("dateResponse").innerHTML= "";
+    }
+        
+})
+
+</script>
+
+</body>
+</html>
