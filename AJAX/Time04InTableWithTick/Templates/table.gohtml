@@ -16,9 +16,6 @@ table, th, td {
     <th>Response</th> 
       </tr>
   <tr>
-
-
-
     <td><input id = "time" type="checkbox" name="time"/>What time is it?</td>
     <td id = "timeResponse"></td>
         </tr>
@@ -27,12 +24,6 @@ table, th, td {
     <td id = "dateResponse"></td>
       </tr>
   </table>
-
-<!--
-document.querySelector('#time').onclick = whatTime;
-
-
---> 
 
 <script>
 
@@ -53,7 +44,6 @@ $('#time').on('change',function() {
 
          document.getElementById("timeResponse").innerHTML= "";
     }
-        
 })
 
 $('#date').on('change',function() {
@@ -72,10 +62,8 @@ $('#date').on('change',function() {
     } else {
 
          document.getElementById("dateResponse").innerHTML= "";
-    }
-        
+    }  
 })
-
 </script>
 
 </body>

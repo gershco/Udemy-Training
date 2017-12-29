@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html>
+<head>
+</head>
+<body>
+
+    <h1>Using AJAX to Update Content</h1>
+    <button id = "push">Get External Content</button>
+    <p id="response"></p>
+
+<script>
+document.querySelector('#push').onclick = getText;
+
+function getText() {
+    var xhr = new XMLHttpRequest();
+    xhr.open('GET', '/ajax', true);
+    xhr.onreadystatechange = function() {
+    textIn = xhr.responseText
+        if(xhr.readyState === XMLHttpRequest.DONE && xhr.status === 200){
+            document.getElementById("response").innerHTML = textIn;
+        }
+    };
+    xhr.send();
+}
+    </script>
+
+</body>
+</html>

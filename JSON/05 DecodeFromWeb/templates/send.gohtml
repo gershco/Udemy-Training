@@ -1,0 +1,22 @@
+<!doctype html>
+
+<head>
+
+</head>
+
+<body>
+
+<h1> Send data to the /catch path </h1>
+
+<script>
+    data = `[{"First":"James","Last":"Bond"},{"First":"Miss","Last":"Moneypenny"}]`;
+    console.log(data);
+    var xhr = new XMLHttpRequest();
+    xhr.open('POST', '/catch', true);
+    xhr.send(data);
+</script>
+
+</body>
+
+
+</html>
