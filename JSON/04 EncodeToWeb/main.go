@@ -27,6 +27,8 @@ func index(w http.ResponseWriter, r *http.Request) {
 	// Create slice of person
 	xp := []person{p1, p2}
 
+	fmt.Println(xp)
+
 	// NewEncoder returns a new encoder that writes to w.
 	// func NewEncoder(w io.Writer) *Encoder {
 

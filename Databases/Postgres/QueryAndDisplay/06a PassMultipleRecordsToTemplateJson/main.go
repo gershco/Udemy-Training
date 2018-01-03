@@ -70,11 +70,12 @@ func users(w http.ResponseWriter, r *http.Request) {
 		and false otherwise.
 	*/
 	type User struct {
-		ID        int    `json:"userid"`
-		Age       int    `json:"userage"`
-		FirstName string `json:"userfirst"`
-		LastName  string `json:"userlast"`
-		Email     string `json:"useremail"`
+		ID        int     `json:"userid"`
+		Age       int     `json:"userage"`
+		FirstName string  `json:"userfirst"`
+		LastName  string  `json:"userlast"`
+		Email     string  `json:"useremail"`
+		Balance   float64 `json:"userbalance"`
 	}
 
 	var user User
@@ -83,7 +84,7 @@ func users(w http.ResponseWriter, r *http.Request) {
 
 	for rows.Next() {
 
-		err = rows.Scan(&user.ID, &user.Age, &user.FirstName, &user.LastName, &user.Email)
+		err = rows.Scan(&user.ID, &user.Age, &user.FirstName, &user.LastName, &user.Email, &user.Balance)
 		if err != nil {
 			// handle this error
 			panic(err)
@@ -106,12 +107,16 @@ func users(w http.ResponseWriter, r *http.Request) {
 	}
 
 	fmt.Println(jsonusers)
+
 	/*
+
+		Work out how to push this
+
 		t, _ := template.ParseFiles("users.html")
 
-		err2 := t.Execute(w, jsonusers)
-		if err2 != nil {
-			log.Fatalln("template didn't execute: ", err)
-		}
+			err2 := t.Execute(w, jsonusers)
+			if err2 != nil {
+				log.Fatalln("template didn't execute: ", err)
+			}
 	*/
 }
