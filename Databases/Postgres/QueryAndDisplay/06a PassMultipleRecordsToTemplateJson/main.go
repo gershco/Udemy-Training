@@ -6,6 +6,7 @@ import (
 	"database/sql"
 	"encoding/json"
 	"fmt"
+	"html/template"
 	"net/http"
 
 	_ "github.com/lib/pq"
@@ -21,9 +22,30 @@ const (
 	dbname   = "postgres"
 )
 
+var templates = template.Must(template.ParseGlob("templates/*"))
+
+type User struct {
+	ID        int
+	Age       int
+	FirstName string
+	LastName  string
+	Email     string
+	Balance   float64
+}
+
+type UserList struct {
+	Data []User `json:"data"`
+}
+
+var person User
+
+var Xuser []User
+
 func main() {
 
-	http.HandleFunc("/", users)
+	http.HandleFunc("/users", users)
+
+	http.HandleFunc("/ajaxcall", callJSON)
 
 	http.ListenAndServe(":8081", nil)
 
@@ -69,54 +91,38 @@ func users(w http.ResponseWriter, r *http.Request) {
 		SQL statement. It returns true when the next row is successfully prepared,
 		and false otherwise.
 	*/
-	type User struct {
-		ID        int     `json:"userid"`
-		Age       int     `json:"userage"`
-		FirstName string  `json:"userfirst"`
-		LastName  string  `json:"userlast"`
-		Email     string  `json:"useremail"`
-		Balance   float64 `json:"userbalance"`
-	}
-
-	var user User
-
-	var jsonusers []string
 
 	for rows.Next() {
 
-		err = rows.Scan(&user.ID, &user.Age, &user.FirstName, &user.LastName, &user.Email, &user.Balance)
+		err = rows.Scan(&person.ID, &person.Age, &person.FirstName, &person.LastName, &person.Email, &person.Balance)
 		if err != nil {
 			// handle this error
 			panic(err)
 		}
 
-		userjson, err := json.Marshal(user) // json.Marshal returns the JSON encoding of emp as a []byte.
-		if err != nil {
-			fmt.Println(err)
-			return
-		}
-
-		jsonusers = append(jsonusers, string(userjson))
-
+		Xuser = append(Xuser, person)
 	}
 
-	// get any error encountered during iteration
-	err = rows.Err()
+	err1 := templates.ExecuteTemplate(w, "users.html", nil)
+	if err1 != nil {
+		http.Error(w, err.Error(), http.StatusInternalServerError)
+		return
+	}
+
+}
+
+func callJSON(w http.ResponseWriter, r *http.Request) {
+
+	data := UserList{Xuser}
+
+	json, err := json.Marshal(data)
+
 	if err != nil {
-		panic(err)
+		fmt.Println("The struct could not be marshalled into JSON.")
 	}
 
-	fmt.Println(jsonusers)
+	w.Write(json)
 
-	/*
+	Xuser = nil
 
-		Work out how to push this
-
-		t, _ := template.ParseFiles("users.html")
-
-			err2 := t.Execute(w, jsonusers)
-			if err2 != nil {
-				log.Fatalln("template didn't execute: ", err)
-			}
-	*/
 }

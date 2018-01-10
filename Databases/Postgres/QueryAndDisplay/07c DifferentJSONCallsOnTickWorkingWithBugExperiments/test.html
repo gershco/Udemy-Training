@@ -1,0 +1,58 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+
+  <style>
+        .right {
+            text-align: right;
+        }
+        </style>
+
+  <title>Javascript Tests</title>
+
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+
+
+</head>
+
+<body>
+
+<h1><center>Javascript Tests</center></h1>
+
+<div class="right">
+                <p><input id = "women" type="checkbox" name="women"/>Show women</p>
+</div>
+
+<p id = "result"></p>
+
+<script>
+
+var check = "/male";
+
+document.getElementById("result").innerHTML = check;
+
+$(document).ready(function() {
+
+    $('#women').on('change',function() {
+
+if(this.checked){
+		
+	var check = "/female";
+
+} else {
+
+	var check = "/male";
+}
+
+document.getElementById("result").innerHTML = check;
+
+});
+
+});    
+
+</script>
+
+</body>
+
+</html>

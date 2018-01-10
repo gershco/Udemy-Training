@@ -22,6 +22,16 @@ const (
 	dbname   = "postgres"
 )
 
+// User is exported for templating
+type User struct {
+	ID        int
+	Age       int
+	FirstName string
+	LastName  string
+	Email     string
+	Balance   float64
+}
+
 func main() {
 
 	http.HandleFunc("/", users)
@@ -71,14 +81,7 @@ func users(w http.ResponseWriter, r *http.Request) {
 		SQL statement. It returns true when the next row is successfully prepared,
 		and false otherwise.
 	*/
-	type User struct {
-		ID        int
-		Age       int
-		FirstName string
-		LastName  string
-		Email     string
-		Balance   float64
-	}
+
 	var user User
 
 	Xuser := []User{}

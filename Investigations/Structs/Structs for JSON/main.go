@@ -2,12 +2,13 @@ package main
 
 import (
 	"encoding/json"
-	"fmt"
-
-	_ "github.com/lib/pq"
+	"html/template"
+	"net/http"
 )
 
-type XMan struct {
+var templates = template.Must(template.ParseGlob("templates/*"))
+
+type ManList struct {
 	Data []Man `json:"data"`
 }
 
@@ -20,21 +21,35 @@ type Man struct {
 	Balance   float64
 }
 
-var men XMan
+var men ManList
 
 func main() {
 
-	fmt.Printf("men is of type %T\n\n", men)
+	http.HandleFunc("/table", table)
+
+	http.HandleFunc("/ajaxcall", callJSON)
+
+	http.ListenAndServe(":7070", nil)
+
+}
+func table(w http.ResponseWriter, r *http.Request) {
+
+	err := templates.ExecuteTemplate(w, "users.html", nil)
+	if err != nil {
+		http.Error(w, err.Error(), http.StatusInternalServerError)
+		return
+	}
+}
+
+func callJSON(w http.ResponseWriter, r *http.Request) {
 
 	m1 := Man{1, 25, "John", "Minor", "john@minor.gov", 125.38}
 	m2 := Man{2, 34, "James", "Riley", "james@riley.com", 78.56}
 	m3 := Man{3, 46, "Nigel", "Kennedy", "nigel@kennedy.mus", 21.59}
 
-	men := []XMan{m1, m2, m3}
+	men := ManList{[]Man{m1, m2, m3}}
 
-	fmt.Printf("\nmen is of type %T\n\n", men)
+	json, _ := json.Marshal(men)
 
-	list, _ := json.Marshal(men)
-
-	fmt.Println(string(list))
+	w.Write(json)
 }

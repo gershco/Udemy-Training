@@ -1,0 +1,103 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+
+  <style>
+	.right {
+		text-align: right;
+	}
+	</style>
+
+  <title>Users from PostgreSQL</title>
+
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+
+  <link rel="stylesheet" type="text/css" href="//cdn.datatables.net/1.10.16/css/jquery.dataTables.css">
+  
+<script type="text/javascript" charset="utf8" src="//cdn.datatables.net/1.10.16/js/jquery.dataTables.js"></script>
+
+<script src="https://cdn.datatables.net/1.10.16/js/jquery.dataTables.min.js"></script>
+
+  
+</head>
+
+<body>
+  
+<h1><center>Users from Postgres</center></h1>
+
+<div class="right">
+	<p><input id = "women" type="checkbox" name="women"/>Show women</p>
+  </div>
+
+<table id="usertable"  class = "display compact order-column row-border stripe hover" width="100%" height="100%">
+	<thead>
+			<tr>
+				<th>ID</th>
+				<th>Age</th>
+				<th>First Name</th>
+				<th>Last Name</th>
+				<th>Email</th>
+				<th>Balance</th>			     
+			</tr>
+	</thead>
+
+	<tfoot>
+			<tr>
+				<th>ID</th>
+				<th>Age</th>
+				<th>First Name</th>
+				<th>Last Name</th>
+				<th>Email</th>
+				<th>Balance</th>			     
+			</tr>
+	</tfoot>
+
+</table>
+
+<script>
+
+var table = "#usertable";	
+
+$(document).ready(function() {
+
+	$(table).DataTable( {
+		"ajax": '/male',
+		"columns": [
+		{ "data": "ID" },
+		{ "data": "Age" },
+		{ "data": "FirstName" },
+		{ "data": "LastName" },
+		{ "data": "Email" },
+		{ "data": "Balance" }
+	]
+	} );
+
+	$('#women').on('change',function() {
+
+if(this.checked){
+		
+	var table = $('#usertable').DataTable( {
+		ajax: "data.json"
+	} );
+		
+	table.ajax.url('/female').load();
+
+
+} else {
+
+	var table = $('#usertable').DataTable( {
+		ajax: "data.json"
+	} );
+		
+	table.ajax.url( '/male').load();
+}
+});
+
+});
+
+</script>
+
+</body>
+
+</html>

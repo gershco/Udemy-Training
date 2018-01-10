@@ -61,6 +61,8 @@ func crime(w http.ResponseWriter, r *http.Request) {
 		)
 	}
 
+	fmt.Println(details)
+
 	t, _ := template.ParseFiles("crime.html")
 
 	err := t.Execute(w, details)

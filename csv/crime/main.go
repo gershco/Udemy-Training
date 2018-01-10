@@ -25,8 +25,8 @@ func main() {
 		// ... Display all individual elements of the slice.
 		fmt.Println(record)
 		fmt.Println(len(record))
-		for value := range record {
+		/*for value := range record {
 			fmt.Printf("  %v\n", record[value])
-		}
+		}*/
 	}
 }
