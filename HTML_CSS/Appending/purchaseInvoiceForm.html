@@ -1,0 +1,133 @@
+<!DOCTYPE HTML>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>purchaseInvoiceForm</title>
+
+
+
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.3/css/bootstrap.min.css" integrity="sha384-Zug+QiDoJOrZ5t4lssLdxGhVrurbmBWopoEl+M6BdEfwnCJZtKxi1KgxUyJq13dy" crossorigin="anonymous">
+</head>
+
+<body>
+
+        <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.3/js/bootstrap.min.js" integrity="sha384-a5N7Y/aK3qNeh15eJKGWxsqtnX/wWdSZSKp+81YjTmS15nvnvxKHuzaWwXHDli+4" crossorigin="anonymous"></script>
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+
+<div class = "container">
+
+    <h3 class = "text-center">Purchase Invoice Form</h3>
+
+    <form method = "POST">
+        <div class="form-group">
+            <div class="row">
+                
+                <div class="col">
+                  <br>Ledger Account:<input type="text" value ="{{.LedgerAccount}}" name="ledgerAccount" id ="ledgerAccount"><br>
+                  Supplier Name: <input type="text" class="form-control" name="supplier" id="supplier" >
+                  Street Address: <input type="text" class="form-control" name="saddress" id="saddress" >
+                  Post Code: <input type="text" class="form-control" ng-bind-template="postcode" id="postcode" >
+                </div>
+
+                <div class="col">
+                  <br>Financial Company:<input type="text" value ="{{.FinancialCompany}}" name="financialCompany" id ="financialCompany">
+                  Supplier Reference: <input type="text" class="form-control" name="supplierRef" id="supplierRef" >
+                  Invoice Description: <input type="text" class="form-control" name="invoiceDescription" id="invoiceDescription" >
+                </div>
+
+                <div class="col">
+                  Invoice Date: <input type="date" class="form-control" name="invoiceDate" id="invoiceDate" >
+                  <br>Currency:   <select name="currency" id="currency">
+                                      <option value="sterling">British Pounds</option>
+                                      <option value="dollars">US Dollars</option>
+                                  </select><br>
+                  Exchange Rate: <input type="text" class="form-control" name="exchangerate" id="exchangerate" >
+                </div>
+
+            </div>
+
+        <hr>
+            <div class="sections" id="sections">
+                <div class="line" id="line1">
+                    <div class="row">
+
+                        <div class="col">
+                          Line Description: <input type="text" class="form-control" name="linedescription" id="linedescription" >
+                          <br>Nominal Account:<input type="text" value ="{{.NominalAccount}}" name="nominalAccount" id ="nominalAccount"><br>
+                          
+                        </div>
+
+                        <div class="col">
+                          Quantity: <input type="text" class="form-control" name="quantity" id="quantity" >
+                          Tax Code: <input type="text" class="form-control" name="taxcode" id="taxcode" >
+                        </div>
+
+                        <div class="col">
+                          Unit Cost Price: <input type="text" class="form-control" name="unitcostprice" id="unitcostprice" >  
+                        </div>
+
+                    </div>
+                    <hr>
+                </div>
+            </div>    
+
+        <input type="button"  id="addline" name="addline" value='Add another line'>
+        <p class="text-right"> <input  type="submit" value="Submit"> </p>
+        </div>  
+    </form>
+</div>
+
+
+<script>
+
+
+
+$('#addline').click(function(){
+
+    var count = 2;
+
+    
+
+
+   $(".sections").append(`<div class="line" id="line` + count + `">
+                                <div class="row">
+
+                                    <div class="col">
+                                    Line Description: <input type="text" class="form-control" name="linedescription" id="linedescription" >
+                                    <br>Nominal Account:<input type="text" value ="{{.NominalAccount}}" name="nominalAccount" id ="nominalAccount"><br>
+                                    
+                                    </div>
+
+                                    <div class="col">
+                                    Quantity: <input type="text" class="form-control" name="quantity" id="quantity" >
+                                    Tax Code: <input type="text" class="form-control" name="taxcode" id="taxcode" >
+                                    </div>
+
+                                    <div class="col">
+                                    Unit Cost Price: <input type="text" class="form-control" name="unitcostprice" id="unitcostprice" >  
+                                    </div>
+
+                                </div>
+                            <hr>
+                            </div><br>`);
+   count++;
+});
+</script>
+
+<!--
+
+<script>
+
+        var count = 0;
+        $('#addline').click(function(){
+           $(".sections").append("<div class='section'><select id='line" + count + "'  name='name" + count + "'></select></div></br>");
+           count++;
+        });
+        </script>-->
+
+
+</body>
+
+</html>
