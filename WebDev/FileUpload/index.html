@@ -1,0 +1,69 @@
+<html>
+<head>
+
+  <title>Upload and Display</title>
+
+  <style>
+            
+            .boxed {
+    border: 3px solid rgba(17, 206, 26, 0.822) ;
+    width: 200px;
+    height: 75px;;
+    padding: 15px;
+    }
+
+  </style>
+    
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+  <script>
+  
+  $(document).ready(function () {
+    $("#addProductForm").submit(function (event) {
+
+      //disable the default form submission
+      event.preventDefault();
+      //grab all form data  
+      var data = new FormData(this); // <-- 'this' is your form element
+
+      $.ajax({
+              url: '/return',
+              data: data,
+              cache: false,
+              contentType: false,
+              processData: false,
+              type: 'POST',     
+              success: function(result) {
+            $('#box').html(result);
+            },
+          error: function(){
+              alert("error in ajax form submission");
+          }
+      });
+
+
+    });
+  });
+  
+  </script>
+
+</head>
+
+<body>
+
+  <form name="addProductForm" id="addProductForm" action="javascript:;" enctype="multipart/form-data" method="post" accept-charset="utf-8">
+
+    {{/* 1. File input */}}
+    <input type="file" id = "choose" name="uploadfile" />
+
+    {{/* 2. Submit button */}}
+    <input type="submit" id = "choose" value="upload file" />
+    
+  </form>
+
+  <div class="boxed" id="box">
+     
+  </div>
+
+</body>
+
+</html>

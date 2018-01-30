@@ -14,6 +14,7 @@ func init() {
 }
 
 func main() {
+	fmt.Println("Serving at localhost:8080")
 	http.HandleFunc("/", index)
 	http.HandleFunc("/time", timee)
 	http.HandleFunc("/date", datee)

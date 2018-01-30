@@ -26,6 +26,7 @@ func ajaxHandler(w http.ResponseWriter, r *http.Request) {
 }
 
 func main() {
+	fmt.Println("Serving at localhost:8080")
 	http.HandleFunc("/", index)
 	http.HandleFunc("/ajax", ajaxHandler)
 	http.ListenAndServe(":8080", nil)

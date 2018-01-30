@@ -1,0 +1,46 @@
+<html>
+<head>
+
+<title>AJAX & JQuery</title>
+
+<style>
+         
+          .boxed {
+  border: 3px solid rgba(0, 128, 43, 0.822) ;
+  width: 200px;
+  height: 75px;;
+  padding: 15px;
+  }
+
+</style>
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+<script>
+
+  $(document).ready(function (){
+    $("button").click(function(){
+      $.ajax({
+        url: '/ajax',
+        success: function(result) {
+        $('#box').html(result);
+        }
+      });
+    });
+  });
+
+</script>
+
+</head>
+
+<body>
+  
+  <h1>Using AJAX and JQuery to Update Content</h1>
+  <button>Get External Content</button>
+  <p id="response"></p>
+
+  <div class="boxed" id="box">
+     
+  </div>
+
+</body>
+</html>
