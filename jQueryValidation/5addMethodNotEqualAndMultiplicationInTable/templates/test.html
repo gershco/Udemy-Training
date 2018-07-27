@@ -1,0 +1,120 @@
+<!DOCTYPE HTML>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>jQuery Validation</title>
+
+  
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/jquery-validation@1.17.0/dist/jquery.validate.js"></script>
+
+
+</head>
+
+<body>
+
+<h2>jQuery Validation</h2>
+
+
+<form method = "POST" id="myForm">
+
+<table id="tranTable" class="table">
+    <thead>
+        <tr>
+            <th style="text-align:center">Company ID</th>
+            <th style="text-align:center">Quantity</th>
+            <th style="text-align:center">Unit Price</th>
+            <th style="text-align:center">Amount</th>
+        </tr>
+    </thead>
+
+    <tbody>
+        <tr>
+            <td id="CompanyID1" class="underlineHighlight" contenteditable="true" ></td>
+            <td id="quantity1" name="quantity1" contenteditable="true" width="80px" style="text-align:center">1</td>
+            <td id="unitPrice1" name="unitPrice1" onkeyup="calculate()" contenteditable="true" width="80px" style="text-align:center">0.00</td>
+            <td id="amount1" name="amount1" contenteditable="true" width="80px" style="text-align:center">0.00</td>
+        </tr>
+
+    </tbody>
+
+</table>
+
+<input type="submit" value="Submit">
+
+</form>
+
+
+
+
+
+
+  <script>
+
+var myQuantity;
+var myUnitPrice;
+var amount;
+var myAmount;
+  
+      function calculate() {
+
+        myQuantity = $("#quantity1").text();
+        myUnitPrice = $("#unitPrice1").text();
+        myAmount = (myQuantity * myUnitPrice).toFixed(2);
+        $("#amount1").text(myAmount)       
+      }
+      
+  </script>
+
+
+
+<script>
+
+  $().ready(function() {
+
+    var validator = $("#myForm").validate({
+    rules: { 
+        CompanyID1: {
+            required:true,              
+            number: true,
+            notEqual: '0'
+        }
+    }, 
+    messages: { 
+        CompanyID1: {
+            required: "Please enter Amount",               
+            
+            notEqual:"Amount can not be zero"
+        }
+    },
+    submitHandler: function() {  
+        form.submit();
+    }
+    });
+
+  jQuery.validator.addMethod("notEqual", function (value, element, param) { // Adding rules for Amount(Not equal to zero)
+      return this.optional(element) || value != '0';
+  });
+
+});
+
+</script>
+
+
+
+
+
+
+
+
+
+
+
+    
+  </body>
+  </html>
+
+</body>
+
+</html>

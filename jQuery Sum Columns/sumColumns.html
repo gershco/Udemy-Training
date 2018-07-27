@@ -1,0 +1,108 @@
+<!DOCTYPE HTML>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Summing Columns</title>
+
+  
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+
+
+</head>
+
+<body>
+
+  <h2>Summing Columns</h2>
+
+
+
+  <table id="tranTable">
+
+      <thead>
+
+          <tr>
+              <th>Description</th>
+              <th style="text-align:center">Quantity</th>
+              <th style="text-align:center">Unit Price</th>
+              <th style="text-align:center">Amount</th>
+              <th style="text-align:center">VAT</th>
+              <th style="text-align:center">Total</th>
+              <th>Nominal</th>   
+              <th>NominalToSend</th>     
+              <th></th>
+              <th></th>
+            </tr>
+
+      </thead>
+
+      <td   ></td>
+
+      <tbody>
+          <tr>
+          <td id="description1" name="description1" type="text" class="underlineHighlight lineDescription" contenteditable="true"></td>
+          <td id="quantity1" name="quantity1" type="text" class="quantity required" contenteditable="true" width="80px" style="text-align:center">1</td>
+          <td><input type="text" class="unitPrice" value="220" name="unitPrice"/></td>
+          <td><input type="text" class="amount" value="0" name="amount"/></td>
+          </tr>
+
+      </tbody>
+  
+
+      <tfoot>
+
+          <tr>
+              <th style="text-align:left; font-weight: bold">Totals:</th>
+              <th style="text-align:center; font-weight: bold">0</th>
+              <th style="text-align:center; font-weight: bold">0.00</th>
+              <th style="text-align:center; font-weight: bold">0.00</th>
+              <th style="text-align:center; font-weight: bold">0.00</th>
+              <th style="text-align:center; font-weight: bold">0.00</th>
+              <th></th>
+              <th></th>
+              <th></th>
+              <th></th>
+            </tr>
+
+<!--               <td><input type="text" class="grdtot" value="" name=""/></td> -->
+
+      </tfoot>
+
+  </table>
+
+  <script type="text/javascript">
+    $(function () {
+        $('.pnm, .price, .subtot, .grdtot').prop('readonly', true);
+        var $tblrows = $("#tblProducts tbody tr");
+
+        $tblrows.each(function (index) {
+            var $tblrow = $(this);
+
+            $tblrow.find('.qty').on('change', function () {
+
+                var qty = $tblrow.find("[name=qty]").val();
+                var price = $tblrow.find("[name=price]").val();
+                var subTotal = parseInt(qty, 10) * parseFloat(price);
+
+                if (!isNaN(subTotal)) {
+
+                    $tblrow.find('.subtot').val(subTotal.toFixed(2));
+                    var grandTotal = 0;
+
+                    $(".subtot").each(function () {
+                        var stval = parseFloat($(this).val());
+                        grandTotal += isNaN(stval) ? 0 : stval;
+                    });
+
+                    $('.grdtot').val(grandTotal.toFixed(2));
+                }
+            });
+        });
+    });
+</script>
+
+
+
+</body>
+
+</html>

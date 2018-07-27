@@ -1,7 +1,6 @@
 package main
 
 import (
-	"fmt"
 	"net/http"
 
 	"Github.com/gershco/UdemyTraining/Notes/edit"
@@ -18,5 +17,4 @@ func main() {
 	http.Handle("/favicon.ico", http.NotFoundHandler())
 	http.ListenAndServe(":8081", nil)
 
-	fmt.Println("Serving on localhost:8081/grab and /edit")
 }

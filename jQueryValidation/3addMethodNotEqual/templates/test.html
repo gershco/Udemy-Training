@@ -1,0 +1,81 @@
+<!DOCTYPE HTML>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>jQuery Validation</title>
+
+  
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/jquery-validation@1.17.0/dist/jquery.validate.js"></script>
+
+
+</head>
+
+<body>
+
+  <h2>jQuery Validation</h2>
+
+
+
+  <form method = "POST" id="myForm">
+    CompanyID:<br>
+    <input type="text"   name="CompanyID" id="CompanyID">
+    
+    <br><br>
+    <input type="submit" value="Submit">
+  </form>
+
+<script>
+  $().ready(function() {
+
+    var validator = $("#myForm").validate({
+    rules: { 
+      CompanyID: {
+            required:true,              
+            number: true,
+            notEqual: '0'
+        }
+    }, 
+    messages: { 
+      CompanyID: {
+            required: "Please enter Amount",               
+            
+            notEqual:"Amount can not be zero"
+        }
+    },
+ 
+
+    });
+    jQuery.validator.addMethod("notEqual", function (value, element, param) { // Adding rules for Amount(Not equal to zero)
+        return this.optional(element) || value != '0.00';
+    });
+
+  });
+
+</script>
+
+<!--
+
+    $.validator.addMethod("notEqualTo", function(value, element, param){
+      return this.optional(element) || value != param;
+  },"This field is required");
+
+    $("#myForm").validate( {
+
+      rules: {
+        companyID: { notEqualTo: "0" },
+
+      },
+
+      messages: {
+        companyID: "Please enter or select a company.",
+
+      }
+    });
+
+--> 
+
+</body>
+
+</html>

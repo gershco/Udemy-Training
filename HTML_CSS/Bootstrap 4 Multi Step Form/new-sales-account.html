@@ -1,0 +1,719 @@
+<!doctype html>
+
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+
+    <title>New Sales Account - Multi Step Form</title>
+
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.2/css/bootstrap.min.css" integrity="sha384-Smlep5jCw/wG7hdkwQ/Z5nLIefveQRIY9nfy6xoR1uRYBtpZgI6339F5dgvm/e9B"
+        crossorigin="anonymous">
+
+    <meta name="description" content="The HTML5 Herald">
+    <meta name="author" content="SitePoint">
+
+    <style type="text/css">
+        #second,
+        #third,
+        #fourth,
+        #fifth,
+        #sixth,
+        #result {
+
+            display: none;
+        }
+
+        .step {
+
+
+            height: 700px;
+            width: 100%;
+        }
+
+        .buttons {
+
+            position: absolute;
+            bottom: 0;
+            right: 0;
+        }
+    </style>
+
+</head>
+
+<body class="bg-dark">
+    <div class="container">
+        <div class="row justify-content-center">
+            <div class="col-md-12 bg-light p-4 rounded mt-5">
+                <h5 class="text-center text-light bg-success mb-2 p-2 rounded lead" id="result">Hello World!</h5>
+                <div class="progress mb-3" style="height:40px;">
+                    <div class="progress-bar bg-info" role="progressBar" style="width:17%;" id="progressBar">
+                        <b class="lead" id="progressText">Step 1</b>
+                    </div>
+                </div>
+                <form action="" method="post" id="form-data">
+                    <div id="first" class="step">
+                        <h4 class="text-center bg-primary p-1 rounded text-light">Company Details</h4>
+                        <div class="row">
+                            <div class="form-group col-sm-6">
+                                <label class="control-label" for="companyName">Company Name</label>
+                                <input type="text" name="companyName" id="companyName" class="form-control needed" value="{{.SalesAccount.Company.Name}}">
+                                <b class="form-text text-danger" id="companyNameError"></b>
+                            </div>
+                            <div class="form-group col-sm-6">
+                                <label class="control-label" for="tradingName">Trading Name</label>
+                                <input type="text" name="tradingName" id="tradingName" class="form-control" value="{{.SalesAccount.Company.TradingName}}">
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="control-label" for="tradingAddress">Trading Address</label>
+                            <textarea name="tradingAddress" id="tradingAddress" class="form-control"></textarea>
+                        </div>
+                        <div class="row">
+                            <div class="form-group col-sm-6">
+                                <label class="control-label" for="tradingPostCode">Post Code</label>
+                                <input type="text" name="tradingPostCode" id="tradingPostCode" class="form-control">
+                            </div>
+                            <div class="form-group col-sm-6">
+                                <label class="control-label" for="tradingCountry">
+                                    <s>Country</s>
+                                </label>
+                                <input type="text" name="tradingCountry" id="tradingCountry" class="form-control" style="background-color :red;">
+                            </div>
+                        </div>
+                        <hr>
+
+                        <div class="form-group">
+                            <label class="control-label" for="collectionAddress">Collection Address (if different from above)</label>
+                            <textarea name="collectionAddress" id="collectionAddress" class="form-control"></textarea>
+                        </div>
+
+                        <div class="row">
+                            <div class="form-group col-sm-6">
+                                <label class="control-label" for="collectionPostCode">Post Code</label>
+                                <input type="text" name="collectionPostCode" id="collectionPostCode" class="form-control">
+                            </div>
+
+                            <div class="form-group col-sm-6">
+                                <label class="control-label" for="collectionCountry">
+                                    <s>Country</s>
+                                </label>
+                                <input type="text" name="collectionCountry" id="collectionCountry" class="form-control" style="background-color :red;">
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <label class="control-label" for="natureOfBusiness">Nature of Business</label>
+                            <input type="text" name="natureOfBusiness" id="natureOfBusiness" class="form-control" value="{{.SalesAccount.Company.NatureOfBusiness}}">
+                        </div>
+                        <div class="buttons">
+                            <div class="form-group">
+                                <a href="#" class="btn btn-success" id="next-1">Next</a>
+                            </div>
+                        </div>
+
+
+                    </div>
+
+                    <div id="second" class="step">
+                        <h4 class="text-center bg-primary p-1 rounded text-light">Social Media Details</h4>
+                        <div class="form-group">
+                            <label class="control-label" for="website">Website</label>
+                            <input type="text" name="website" id="website" class="form-control">
+                        </div>
+                        <div class="row">
+                            <div class="form-group col-sm-6">
+                                <label class="control-label" for="facebook">Facebook</label>
+                                <input type="text" name="facebook" id="facebook" class="form-control">
+                            </div>
+                            <div class="form-group col-sm-6">
+                                <label class="control-label" for="twitter">Twitter</label>
+                                <input type="text" name="twitter" id="twitter" class="form-control">
+                            </div>
+                        </div>
+                        <div class="buttons">
+                            <div class="form-group">
+                                <a href="#" class="btn btn-secondary" id="prev-2">Previous</a>
+                                <a href="#" class="btn btn-success" id="next-2">Next</a>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div id="third" class="step">
+                        <h4 class="text-center bg-primary p-1 rounded text-light">Contact Details</h4>
+
+                        <div class="row">
+                            <div class="col-sm-6">
+
+                                <br>
+                                <h6>Main Contact</h6>
+                                <div class="row">
+                                    <div class="col-sm-7">
+                                        <div class="form-group row">
+                                            <label for="mainContactName" class="col-sm-3 col-form-label">Name</label>
+                                            <div class="col-sm-9">
+                                                <input id="mainContactName" name="mainContactName" type="text" class="form-control needed" placeholder="Main Contact Name"
+                                                    required>
+                                            </div>
+                                        </div>
+                                        <div class="form-group row">
+                                            <label for="mainContactTelephone" class="col-sm-3 col-form-label">Telephone</label>
+                                            <div class="col-sm-9">
+                                                <input id="mainContactTelephone" name="mainContactTelephone" type="text" class="form-control needed" placeholder="Main Contact Telephone"
+                                                    required>
+                                            </div>
+                                        </div>
+                                        <div class="form-group row">
+                                            <label for="mainContactEmail" class="col-sm-3 col-form-label">Email</label>
+                                            <div class="col-sm-9">
+                                                <input id="mainContactEmail" name="mainContactEmail" type="email" class="form-control needed" placeholder="Main Contact Email"
+                                                    required>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <div class="col-sm-5">
+                                        <div class="form-group row">
+                                            <label for="mainContactPosition" class="col-sm-4 col-form-label">Position</label>
+                                            <div class="col-sm-8">
+                                                <select id="mainContactPosition" name="mainContactPosition" class="form-control" style="font-size: 14px;">
+                                                    <option value="Director">Director</option>
+                                                    <option value="Accounts">Accounts</option>
+                                                    <option value="Shipping">Shipping</option>
+                                                    <option value="Other">Other</option>
+                                                </select>
+                                            </div>
+                                        </div>
+                                        <div class="form-group row">
+                                            <label for="mainContactPhoneType" class="col-sm-4 col-form-label"></label>
+                                            <div class="col-sm-8">
+                                                <select id="mainContactPhoneType" name="mainContactPhoneType" class="form-control" style="font-size: 14px;">
+                                                    <option value="Office">Office</option>
+                                                    <option value="Mobile">Mobile</option>
+                                                    <option value="Home">Home</option>
+                                                    <option value="Fax">Fax</option>
+                                                </select>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="col-sm-6">
+
+                                <br>
+                                <h6>Shipping Contact</h6>
+                                <div class="row">
+                                    <div class="col-sm-7">
+                                        <div class="form-group row">
+                                            <label for="shippingContact" class="col-sm-3 col-form-label">Name</label>
+                                            <div class="col-sm-9">
+                                                <input id="shippingContact" name="shippingContact" type="text" class="form-control" placeholder="Shipping Name">
+                                            </div>
+                                        </div>
+                                        <div class="form-group row">
+                                            <label for="shippingContactTelephone" class="col-sm-3 col-form-label">Telephone</label>
+                                            <div class="col-sm-9">
+                                                <input id="shippingContactTelephone" name="shippingContactTelephone" type="text" class="form-control" placeholder="Shipping Telephone">
+                                            </div>
+                                        </div>
+                                        <div class="form-group row">
+                                            <label for="shippingContactEmail" class="col-sm-3 col-form-label">Email</label>
+                                            <div class="col-sm-9">
+                                                <input id="shippingContactEmail" name="shippingContactEmail" type="email" class="form-control" placeholder="Shipping Email">
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <div class="col-sm-5">
+                                        <div class="form-group row">
+                                            <label for="shippingContactPosition" class="col-sm-4 col-form-label">Position</label>
+                                            <div class="col-sm-8">
+                                                <select id="shippingContactPosition" name="shippingContactPosition" class="form-control" style="font-size: 14px;">
+                                                    <option value="Shipping">Shipping</option>
+                                                    <option value="Accounts">Accounts</option>
+                                                    <option value="Director">Director</option>
+                                                    <option value="Other">Other</option>
+                                                </select>
+                                            </div>
+                                        </div>
+                                        <div class="form-group row">
+                                            <label for="shippingContactPhoneType" class="col-sm-4 col-form-label"></label>
+                                            <div class="col-sm-8">
+                                                <select id="shippingContactPhoneType" name="shippingContactPhoneType" class="form-control" style="font-size: 14px;">
+                                                    <option value="Office">Office</option>
+                                                    <option value="Mobile">Mobile</option>
+                                                    <option value="Home">Home</option>
+                                                    <option value="Fax">Fax</option>
+                                                </select>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <br>
+
+                        <div class="row">
+                            <div class="col-sm-6">
+
+                                <h6>Accounts Contact</h6>
+                                <div class="row">
+                                    <div class="col-sm-7">
+                                        <div class="form-group row">
+                                            <label for="accountsContact" class="col-sm-3 col-form-label">Name</label>
+                                            <div class="col-sm-9">
+                                                <input id="accountsContact" name="accountsContact" type="text" class="form-control" placeholder="Accounts Name">
+                                            </div>
+                                        </div>
+                                        <div class="form-group row">
+                                            <label for="accountsContactTelephone" class="col-sm-3 col-form-label">Telephone</label>
+                                            <div class="col-sm-9">
+                                                <input id="accountsContactTelephone" name="accountsContactTelephone" type="text" class="form-control" placeholder="Accounts Telephone">
+                                            </div>
+                                        </div>
+                                        <div class="form-group row">
+                                            <label for="accountsContactEmail" class="col-sm-3 col-form-label">Email</label>
+                                            <div class="col-sm-9">
+                                                <input id="accountsContactEmail" name="accountsContactEmail" type="email" class="form-control" placeholder="Accounts Email">
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <div class="col-sm-5">
+                                        <div class="form-group row">
+                                            <label for="accountsContactPosition" class="col-sm-4 col-form-label">Position</label>
+                                            <div class="col-sm-8">
+                                                <select id="accountsContactPosition" name="accountsContactPosition" class="form-control" style="font-size: 14px;">
+                                                    <option value="Accounts">Accounts</option>
+                                                    <option value="Shipping">Shipping</option>
+                                                    <option value="Director">Director</option>
+                                                    <option value="Other">Other</option>
+                                                </select>
+                                            </div>
+                                        </div>
+                                        <div class="form-group row">
+                                            <label for="accountsContactPhoneType" class="col-sm-4 col-form-label"></label>
+                                            <div class="col-sm-8">
+                                                <select id="accountsContactPhoneType" name="accountsContactPhoneType" class="form-control" style="font-size: 14px;">
+                                                    <option value="Office">Office</option>
+                                                    <option value="Mobile">Mobile</option>
+                                                    <option value="Home">Home</option>
+                                                    <option value="Fax">Fax</option>
+                                                </select>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="col-sm-6">
+
+                                <h6>Collection Contact</h6>
+                                <div class="row">
+                                    <div class="col-sm-7">
+                                        <div class="form-group row">
+                                            <label for="collectionContact" class="col-sm-3 col-form-label">Name</label>
+                                            <div class="col-sm-9">
+                                                <input id="collectionContact" name="collectionContact" type="text" class="form-control" placeholder="Collection Name">
+                                            </div>
+                                        </div>
+                                        <div class="form-group row">
+                                            <label for="collectionContactTelephone" class="col-sm-3 col-form-label">Telephone</label>
+                                            <div class="col-sm-9">
+                                                <input id="collectionContactTelephone" name="collectionContactTelephone" type="text" class="form-control" placeholder="Collection Telephone">
+                                            </div>
+                                        </div>
+                                        <div class="form-group row">
+                                            <label for="collectionContactEmail" class="col-sm-3 col-form-label">Email</label>
+                                            <div class="col-sm-9">
+                                                <input id="collectionContactEmail" name="collectionContactEmail" type="email" class="form-control" placeholder="Collection Email">
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <div class="col-sm-5">
+                                        <div class="form-group row">
+                                            <label for="collectionContactPosition" class="col-sm-4 col-form-label">Position</label>
+                                            <div class="col-sm-8">
+                                                <select id="collectionContactPosition" name="collectionContactPosition" class="form-control" style="font-size: 14px;">
+                                                    <option value="Accounts">Accounts</option>
+                                                    <option value="Shipping">Shipping</option>
+                                                    <option value="Director">Director</option>
+                                                    <option value="Other">Other</option>
+                                                </select>
+                                            </div>
+                                        </div>
+                                        <div class="form-group row">
+                                            <label for="accountsContactPhoneType" class="col-sm-4 col-form-label"></label>
+                                            <div class="col-sm-8">
+                                                <select id="collectionContactPhoneType" name="collectionContactPhoneType" class="form-control" style="font-size: 14px;">
+                                                    <option value="Office">Office</option>
+                                                    <option value="Mobile">Mobile</option>
+                                                    <option value="Home">Home</option>
+                                                    <option value="Fax">Fax</option>
+                                                </select>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="buttons">
+                            <div class="form-group">
+                                <a href="#" class="btn btn-secondary" id="prev-3">Previous</a>
+                                <a href="#" class="btn btn-success" id="next-3">Next</a>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div id="fourth" class="step">
+                        <h4 class="text-center bg-primary p-1 rounded text-light">
+                            <s>Sales Persons</s>
+                        </h4>
+                        <div class="row">
+                            <div class="form-group col-sm-6">
+                                <label class="control-label" for="salesPersonInt">International</label>
+                                <input type="text" name="salesPersonInt" id="salesPersonInt" class="form-control" style="background-color :red;">
+                            </div>
+                            <div class="form-group col-sm-6">
+                                <label class="control-label" for="salesPersonUk">UK</label>
+                                <input type="text" name="salesPersonUk" id="salesPersonUk" class="form-control" style="background-color :red;">
+                            </div>
+                        </div>
+                        <div class="buttons">
+                            <div class="form-group">
+                                <a href="#" class="btn btn-secondary" id="prev-4">Previous</a>
+                                <a href="#" class="btn btn-success" id="next-4">Next</a>
+                            </div>
+                        </div>
+
+
+                    </div>
+
+                    <div id="fifth" class="step">
+                        <h4 class="text-center bg-primary p-1 rounded text-light">Accounts Details</h4>
+                        <div class="row">
+                            <div class="form-group col-sm-6">
+                                <label class="control-label" for="projectedMonthlySpend">Projected Monthly Spend</label>
+                                <input type="text" name="projectedMonthlySpend" id="projectedMonthlySpend" class="form-control">
+                            </div>
+                            <div class="form-group col-sm-6">
+                                <label class="control-label" for="currency">Currency</label>
+                                <input type="text" name="currency" id="currency" class="form-control" value="{{.SalesAccount.BaseCurrency}}" style="background-color :goldenrod;">
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="form-group col-sm-6">
+                                <label class="control-label" for="courierExport">Courier Export</label>
+                                <input type="text" name="courierExport" id="courierExport" class="form-control">
+                            </div>
+                            <div class="form-group col-sm-6">
+                                <label class="control-label" for="courierImport">Courier Import</label>
+                                <input type="text" name="courierImport" id="courierImport" class="form-control">
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="form-group col-sm-6">
+                                <label class="control-label" for="freightExport">Freight Export (+50kg)</label>
+                                <input type="text" name="freightExport" id="freightExport" class="form-control">
+                            </div>
+                            <div class="form-group col-sm-6">
+                                <label class="control-label" for="freightImport">Freight Import (+50kg)</label>
+                                <input type="text" name="freightImport" id="freightImport" class="form-control">
+                            </div>
+                        </div>
+                        <!-- All for ADMIN related stuff
+                                <div class="form-group">
+                                <label class="control-label" for="paymentMethod">Payment Method</label>
+                                <select id="test">
+                                  <option value="7days">7 days</option>
+                                  <option value="14days">14 days</option>
+                                  <option value="30days">30 days</option>
+                                  <option value="45days">45 days</option>
+                                  <option value="60days">60 days</option>
+                                  <option value="75days">75 days</option>
+                                  <option value="90days">90 days</option>
+                                  <option value="15OfMonth">15th of Month</option>
+                                  <option class="editable" value="custom">Custom</option>
+                                </select>
+                                <input class="editOption" style="display:none;" placeholder="text">
+                              </div>        
+                              <div class="form-group">
+                                <label class="control-label" for="paymentMethod">Payment Method</label>
+                                <select id="paymentMethod">
+                                  <option value="bacs">BACS</option>
+                                  <option value="dd">Direct Debit</option>
+                                  <option value="cheque">Cheque</option>
+                                  <option value="cash">Cash</option>
+                                  <option value="cc">Credit Card</option>
+                                  <option value="payPal">PayPal</option>
+                                </select>
+                              </div>
+                              <div class="form-group">
+                                <label class="control-label" for="creditsafeLimit">Creditsafe Credit Limit</label>
+                                <input type="text" name="creditsafeLimit" id="creditsafeLimit" class="form-control" >
+                              </div>
+                        
+                              <div class="form-group">
+                                <label class="control-label col-sm-3" for="itdLimit">ITD Credit Limit</label>
+                                <div class="col-sm-5">
+                                  <input type="text" name="itdLimit" id="itdLimit" class="form-control" >
+                                </div>
+                                <div class="col-sm-4">
+                                  <div class="checkbox">
+                                    <label><input id="creditLimitCheckbox" type="checkbox"> No credit Limit</label>
+                                  </div>
+                                </div>
+                              </div>
+                              
+                              <div class="form-group">
+                        
+                                <div class="col-sm-6">
+                                  <label class="control-label" for="accountStatus">Account Status</label><br>
+                        
+                                  <input id="potential" type="radio" class="accountStatus" name="accountStatus" value="potential" checked="checked">Potential<br>
+                                  <input id="active" type="radio" class="accountStatus" name="accountStatus" value="active">Active<br>
+                                  <input id="onStop" type="radio" class="accountStatus" name="accountStatus" value="onStop">On Stop<br>
+                                </div>
+                                <div id="customerRefDiv">
+                                  <label class="control-label" for="customerRefNumber">Customer Reference Number</label>
+                                  <input type="text" name="customerRefNumber" id="customerRefNumber" class="form-control col-sm-6" >
+                                </div>
+                              </div> -->
+
+                        <div class="row">
+                            <div class="form-group col-sm-6">
+                                <label class="control-label" for="compNo">Company Registration Number</label>
+                                <input type="text" name="compNo" id="compNo" class="form-control" value="{{.SalesAccount.Company.CompanyRegistrationNumber}}">
+                            </div>
+                            <div class="col-sm-6">
+                                <br>
+                                <br>
+                                <div class="form-check">
+                                    <label for="ecCheckbox" class="form-check-label">
+                                        <input id="ecCheckbox" name="ecCheckbox" type="checkbox" class="form-check-input">EC Customer
+                                        <s>xx</s>
+                                    </label>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="row onlyEC" style="display: none;">
+                            <div class="form-group col-sm-6">
+                                <label class="control-label" for="ecCountry">
+                                    <s>EC Country</s>
+                                </label>
+                                <input type="text" name="ecCountry" id="ecCountry" class="form-control" style="background-color:red;">
+                            </div>
+                            <div class="form-group col-sm-6">
+                                <label class="control-label" for="vatEoriNo">VAT / EORI Number</label>
+                                <input type="text" name="vatEoriNo" id="vatEoriNo" class="form-control" value="{{.SalesAccount.Company.VatRegistrationNumber}}">
+                            </div>
+                        </div>
+                        <div class="buttons">
+                            <div class="form-group">
+                                <a href="#" class="btn btn-secondary" id="prev-5">Previous</a>
+                                <a href="#" class="btn btn-success" id="next-5">Next</a>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div id="sixth" class="step">
+                        <h4 class="text-center bg-primary p-1 rounded text-light">
+                            <s>Marketing Permissions</s>
+                        </h4>
+                        <div class="row">
+                            <div class="col-sm-3">
+                                <div class="form-check">
+                                    <label for="marketingEmail" class="form-check-label">
+                                        <input id="marketingEmail" name="marketingEmail" type="checkbox" class="form-check-input">Email
+                                    </label>
+                                </div>
+                                <br>
+                                <div class="form-check">
+                                    <label for="marketingPost" class="form-check-label">
+                                        <input id="marketingPost" name="marketingPost" type="checkbox" class="form-check-input">Post
+                                    </label>
+                                </div>
+                                <br>
+                                <div class="form-check">
+                                    <label for="marketingTelephone" class="form-check-label">
+                                        <input id="marketingTelephone" name="marketingTelephone" type="checkbox" class="form-check-input">Telephone
+                                    </label>
+                                </div>
+                            </div>
+
+                            <div class="col-sm-9">
+                                <div class="form-group row">
+                                    <label for="marketingAuthorisedBy" class="col-sm-5 col-form-label">Authorised by</label>
+                                    <div class="col-sm-7">
+                                        <input id="marketingAuthorisedBy" name="marketingAuthorisedBy" type="text" class="form-control" style="background-color :red;">
+                                    </div>
+                                </div>
+                                <div class="form-group row">
+                                    <label for="marketingAuthorisationDate" class="col-sm-5 col-form-label">Authorisation Date</label>
+                                    <div class="col-sm-7">
+                                        <input id="marketingAuthorisationDate" name="marketingAuthorisationDate" type="text" class="form-control" style="background-color :red;">
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="buttons">
+                            <div class="form-group">
+                                <a href="#" class="btn btn-secondary" id="prev-6">Previous</a>
+                                <input type="submit" name="submit" value="Submit" id="submit" class="btn btn-success">
+                            </div>
+                        </div>
+
+                    </div>
+
+                </form>
+            </div>
+        </div>
+
+    </div>
+
+
+
+    <script src="https://code.jquery.com/jquery-3.3.1.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8="
+        crossorigin="anonymous"></script>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49"
+        crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.2/js/bootstrap.min.js" integrity="sha384-o+RDsa0aLu++PJvFqy8fFScvbHFLtbvScb8AjopnFD+iEQ7wo/CG0xlczd+2O/em"
+        crossorigin="anonymous"></script>
+
+
+    <script>
+        $(document).ready(function () {
+
+            $("#next-1").click(function (e) {
+
+                e.preventDefault();
+                $("#companyNameError").html("");
+
+                if ($("#companyName").val() == "") {
+
+                    $("#companyNameError").html("* Company Name is required");
+                    return false;
+                } else if ($("#companyName").val().length < 3) {
+
+                    $("#companyNameError").html("* Company Name must contain at least three characters");
+                    return false;
+                } else {
+
+                    $("#first").hide();
+                    $("#second").show();
+                    $("#progressBar").css("width", "33%");
+                    $("#progressText").text("Step 2");
+                }
+            });
+
+            $("#prev-2").click(function () {
+
+                $("#second").hide();
+                $("#first").show();
+                $("#progressBar").css("width", "17%");
+                $("#progressText").text("Step 1");
+            });
+
+            $("#next-2").click(function () {
+
+                $("#second").hide();
+                $("#third").show();
+                $("#progressBar").css("width", "50%");
+                $("#progressText").text("Step 3");
+            });
+
+            $("#prev-3").click(function () {
+
+                $("#third").hide();
+                $("#second").show();
+                $("#progressBar").css("width", "33%");
+                $("#progressText").text("Step 2");
+            });
+
+            $("#next-3").click(function () {
+
+                $("#third").hide();
+                $("#fourth").show();
+                $("#progressBar").css("width", "67%");
+                $("#progressText").text("Step 4");
+            });
+
+            $("#prev-4").click(function () {
+
+                $("#fourth").hide();
+                $("#third").show();
+                $("#progressBar").css("width", "50%");
+                $("#progressText").text("Step 3");
+            });
+
+            $("#next-4").click(function () {
+
+                $("#fourth").hide();
+                $("#fifth").show();
+                $("#progressBar").css("width", "83%");
+                $("#progressText").text("Step 5");
+            });
+
+            $("#prev-5").click(function () {
+
+                $("#fifth").hide();
+                $("#fourth").show();
+                $("#progressBar").css("width", "67%");
+                $("#progressText").text("Step 4");
+            });
+
+            $("#next-5").click(function () {
+
+                $("#fifth").hide();
+                $("#sixth").show();
+                $("#progressBar").css("width", "100%");
+                $("#progressText").text("Step 6");
+            });
+
+            $("#prev-6").click(function () {
+
+                $("#sixth").hide();
+                $("#fifth").show();
+                $("#progressBar").css("width", "83%");
+                $("#progressText").text("Step 5");
+            });
+
+            $("#submit").click(function () {
+
+            });
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+            // Show EC Country & VAT/EORI when EC Customer is selected
+            $(document).on('change', '#ecCheckbox[type=checkbox]', function () {
+
+                if ($("#ecCheckbox").prop("checked")) {
+
+                    $(".onlyEC").show();
+                } else {
+                    $(".onlyEC").hide();
+                };
+            });
+
+        });
+    </script>
+</body>
+
+</html>

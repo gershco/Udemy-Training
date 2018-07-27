@@ -13,6 +13,22 @@
 
 <script src="https://cdn.datatables.net/1.10.16/js/jquery.dataTables.min.js"></script>
 
+<style>
+    
+    .scrollbar::-webkit-scrollbar
+{
+    width: 6px;
+    background-color: #000000;
+}
+ 
+.scrollbar::-webkit-scrollbar-thumb
+{
+    border-radius: 10px;
+    -webkit-box-shadow: inset 0 0 6px rgba(0,0,0,.3);
+    background-color: #00a3e8;
+}
+    
+    </style>
   
 </head>
 
@@ -56,9 +72,12 @@
             { "data": "LastName" },
             { "data": "Email" },
             { "data": "Balance" }
-        ]
-		} );
-	} );
+			],
+			"initComplete": function(settings, json) {
+            $('body').find('.dataTables_scrollBody').addClass("scrollbar");
+        },
+		});
+	});
 </script>	
 
 </body>

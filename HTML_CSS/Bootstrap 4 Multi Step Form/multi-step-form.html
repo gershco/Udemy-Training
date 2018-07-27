@@ -1,0 +1,225 @@
+<!doctype html>
+
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+
+    <title>Multi Step From</title>
+
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.2/css/bootstrap.min.css" integrity="sha384-Smlep5jCw/wG7hdkwQ/Z5nLIefveQRIY9nfy6xoR1uRYBtpZgI6339F5dgvm/e9B"
+        crossorigin="anonymous">
+
+    <meta name="description" content="The HTML5 Herald">
+    <meta name="author" content="SitePoint">
+
+    <style type="text/css">
+        #second,
+        #third,
+        #result {
+
+            display: none;
+        }
+    </style>
+
+</head>
+
+<body class="bg-dark">
+    <div class="container">
+        <div class="row justify-content-center">
+            <div class="col-md-6 bg-light p-4 rounded mt-5">
+                <h5 class="text-center text-light bg-success mb-2 p-2 rounded lead" id="result">Hello World!</h5>
+                <div class="progress mb-3" style="height:40px;">
+                    <div class="progress-bar bg-info" role="progressBar" style="width:33%;" id="progressBar">
+                        <b class="lead" id="progressText">Step 1</b>
+                    </div>
+                </div>
+                <form action="" method="post" id="form-data">
+                    <div id="first">
+                        <h4 class="text-center bg-primary p-1 rounded text-light">Personal Information</h4>
+                        <div class="form-group">
+                            <label for="name">Name</label>
+                            <input type="text" name="name" class="form-control" placeholder="Full Name" id="name">
+                            <b class="form-text text-danger" id="nameError"></b>
+                        </div>
+                        <div class="form-group">
+                            <label for="userName">Username</label>
+                            <input type="text" name="userName" class="form-control" placeholder="Username" id="username">
+                            <b class="form-text text-danger" id="usernameError"></b>
+                        </div>
+                        <div class="form-group">
+                            <a href="#" class="btn btn-success float-right" id="next-1">Next</a>
+                        </div>
+                    </div>
+                    <div id="second">
+                        <h4 class="text-center bg-primary p-1 rounded text-light">Contact Information</h4>
+                        <div class="form-group">
+                            <label for="email">E-mail</label>
+                            <input type="email" name="email" class="form-control" placeholder="E-mail" id="email">
+                            <b class="form-text text-danger" id="emailError"></b>
+                        </div>
+                        <div class="form-group">
+                            <label for="telephone">Telephone</label>
+                            <input type="tel" name="telephone" class="form-control" placeholder="Telephone" id="telephone">
+                            <b class="form-text text-danger" id="telephoneError"></b>
+                        </div>
+                        <div class="form-group">
+                            <a href="#" class="btn btn-secondary" id="prev-2">Previous</a>
+                            <a href="#" class="btn btn-success float-right" id="next-2">Next</a>
+                        </div>
+                    </div>
+                    <div id="third">
+                        <h4 class="text-center bg-primary p-1 rounded text-light">Choose Password</h4>
+                        <div class="form-group">
+                            <label for="password">Password</label>
+                            <input type="password" name="pass" class="form-control" placeholder="Password" id="pass">
+                            <b class="form-text text-danger" id="passError"></b>
+                        </div>
+                        <div class="form-group">
+                            <label for="confirm-password">Confirm Password</label>
+                            <input type="password" name="cpass" class="form-control" placeholder="Confirm Password" id="cpass">
+                            <b class="form-text text-danger" id="cpassError"></b>
+                        </div>
+                        <div class="form-group">
+                            <a href="#" class="btn btn-secondary" id="prev-3">Previous</a>
+                            <input type="submit" name="submit" value="Submit" id="submit" class="btn btn-success float-right">
+                        </div>
+
+                    </div>
+                </form>
+            </div>
+        </div>
+
+    </div>
+
+
+
+    <script src="https://code.jquery.com/jquery-3.3.1.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8="
+        crossorigin="anonymous"></script>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49"
+        crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.2/js/bootstrap.min.js" integrity="sha384-o+RDsa0aLu++PJvFqy8fFScvbHFLtbvScb8AjopnFD+iEQ7wo/CG0xlczd+2O/em"
+        crossorigin="anonymous"></script>
+
+
+    <script>
+        $(document).ready(function () {
+
+            $("#next-1").click(function (e) {
+
+                e.preventDefault();
+                $("#nameError").html("");
+                $("#usernameError").html("");
+
+                if ($("#name").val() == "") {
+
+                    $("#nameError").html("* Name is required");
+                    return false;
+                } else if ($("#name").val().length < 3) {
+
+                    $("#nameError").html("* Name must contain at least three characters");
+                    return false;
+                } else if (!isNaN($("#name").val())) {
+
+                    $("#nameError").html("* Name cannot contain numbers");
+                    return false;
+                } else if ($("#username").val() == "") {
+
+                    $("#usernameError").html("* Username is required");
+                    return false;
+                } else {
+
+                    $("#first").hide();
+                    $("#second").show();
+                    $("#progressBar").css("width", "66%");
+                    $("#progressText").text("Step 2");
+                }
+
+
+            });
+
+            $("#prev-2").click(function () {
+
+                $("#second").hide();
+                $("#first").show();
+                $("#progressBar").css("width", "33%");
+                $("#progressText").text("Step 1");
+            });
+
+            $("#next-2").click(function (e) {
+
+                e.preventDefault();
+                $("#emailError").html("");
+                $("#telephoneError").html("");
+
+                if ($("#email").val() == "") {
+
+                    $("#emailError").html("* Email is required");
+                    return false;
+                } else if (!validateEmail($("#email").val())) {
+
+                    $("#emailError").html("* Email is not valid");
+                    return false;
+                } else if ($("#telephone").val() == "") {
+
+                    $("#telephoneError").html("* Telephone number is required");
+                    return false;
+                } else if (isNaN($("#telephone").val())) {
+
+                    $("#telephoneError").html("* Only numbers are allowed");
+                    return false;
+                } else if ($("#telephone").val().length != 10) {
+
+                    $("#telephoneError").html("* Phone number must contain 10 digits");
+                    return false;
+                } else {
+
+                    $("#second").hide();
+                    $("#third").show();
+                    $("#progressBar").css("width", "100%");
+                    $("#progressText").text("Step 3");
+                }
+
+                function validateEmail($email) {
+                    var emailReg = /^([\w-\.]+@([\w-]+\.)+[\w-]{2,4})?$/;
+                    return emailReg.test($email);
+                }
+            });
+
+            $("#prev-3").click(function () {
+
+                $("#third").hide();
+                $("#second").show();
+                $("#progressBar").css("width", "66%");
+                $("#progressText").text("Step 2");
+            });
+
+            $("#submit").click(function (e) {
+
+                e.preventDefault();
+                $("#passError").html("");
+                $("#cpassError").html("");
+
+                if ($("#pass").val() == "") {
+
+                    $("#passError").html("* Password is required");
+                    return false;
+                } else if ($("#pass").val().length < 6) {
+
+                    $("#passError").html("* Password must contain at least 6 characters");
+                    return false;
+                } else if ($("#cpass").val() != $("#pass").val()) {
+
+                    $("#cpassError").html("* Passwords do not match");
+                    return false;
+                }
+
+
+            });
+
+        });
+    </script>
+</body>
+
+</html>
